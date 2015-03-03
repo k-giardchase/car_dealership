@@ -25,6 +25,10 @@
                         <label for='price'>Enter Maximum Price:</label>
                         <input id='price' name='price' class='form-control' type='number'/>
                     </div>
+                    <div class='form-group'>
+                        <label for='miles'>Enter Maximum Mileage:</label>
+                        <input id='miles' name='miles' class='form-control' type='number'/>
+                    </div>
                     <button type='submit' class='btn-success'>Submit</button>
                 </form>
             </div>
@@ -35,7 +39,7 @@
     });
 
     $app->get("search_result", function() {
-        
+
     });
     return $app;
 
