@@ -1,6 +1,7 @@
 <?php
 
     require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__."/../src/car.php";
 
     $app = new Silex\Application();
 
@@ -31,6 +32,10 @@
 
         </html>
         ";
+    });
+
+    $app->get("search_result", function() {
+        
     });
     return $app;
 

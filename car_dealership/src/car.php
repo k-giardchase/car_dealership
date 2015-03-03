@@ -18,6 +18,11 @@
             return $this->price < ($max_price + 100 );
         }
 
+        function worthMileage($max_mileage)
+        {
+            return $this->miles < ($max_mileage + 100);
+        }
+
         function setMakeModel($new_make_model)
         {
             $this->make_model = $new_make_model;
