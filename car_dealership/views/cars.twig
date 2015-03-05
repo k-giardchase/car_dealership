@@ -17,6 +17,10 @@
                     {% endfor %}
                 </ul>
         {% endif %}
+        <p><a href='/'>Add a new car</a></p>
+        <form action='/delete_cars' method='post'>
+                   <button type='submit'>Clear list</button>
+        </form>
     </div>
 </body>
 </html>

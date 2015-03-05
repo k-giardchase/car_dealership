@@ -55,12 +55,16 @@
 
         function save()
         {
-            array_push($_SESSION['list_of_cars'], $this);
+            array_push($_SESSION['total_cars'], $this);
         }
 
         static function getAll()
         {
-            return $_SESSION['list_of_cars'];
+            return $_SESSION['total_cars'];
+        }
+        static function deleteAll()
+        {
+            $_SESSION['total_cars'] = array();
         }
     }
 

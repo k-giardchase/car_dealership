@@ -4,8 +4,8 @@
     require_once __DIR__."/../src/car.php";
 
     session_start();
-    if(empty($_SESSION['list_of_cars'])){
-        $_SESSION['list_of_cars'] = array();
+    if(empty($_SESSION['total_cars'])) {
+        $_SESSION['total_cars'] = array();
         }
 
 
@@ -16,36 +16,43 @@
     ));
 
 
-    $app->get("/", function() use ($app){
+        $app->get("/", function() use ($app){
 
-        return $app['twig']->render('search_car.twig');
-    });
+            return $app['twig']->render('search_car.twig');
+        });
 
-    $app->get("search_result", function() use ($app) {
-        $porsche = new Car("2014 Porsche 911", 114991, 7684);
-        $ford = new Car("2011 Ford F450", 55995, 14241);
-        $lexus = new Car("2013 Lexus RX 350", 44700, 20000);
-        $mercedes = new Car("Mercedes Benz CLS550", 399000, 37979);
+        $app->get("/search_result", function() use ($app) {
+            // $porsche = new Car("2014 Porsche 911", 114991, 7684);
+            // $ford = new Car("2011 Ford F450", 55995, 14241);
+            // $lexus = new Car("2013 Lexus RX 350", 44700, 20000);
+            // $mercedes = new Car("Mercedes Benz CLS550", 399000, 37979);
 
-        $cars = array($porsche, $ford, $lexus, $mercedes);
-
-        $search_results = array();
-            foreach($cars as $car) {
-                if($car->worthBuying($_GET['price']) && ($car->worthMileage($_GET['miles']))) {
-                    array_push($search_results, $car);
+            // $cars = array($porsche, $ford, $lexus, $mercedes);
+            $cars = array();
+            $search_results = array();
+                foreach($cars as $car) {
+                    if($car->worthBuying($_GET['price']) && ($car->worthMileage($_GET['miles']))) {
+                        array_push($search_results, $car);
+                    }
                 }
-            }
+                return $app['twig']->render('cars.twig', array('list_of_cars' => Car::getAll()));
+            // return $app['twig']->render('cars.twig', array('list_of_cars' => $search_results));
 
-        return $app['twig']->render('cars.twig', array('list_of_cars' => $search_results));
+        });
 
-    });
+        $app->post("/create_car", function () use ($app) {
+            $new_car = new Car($_POST['make_model'],$_POST['price'], $_POST['miles']);
+            $new_car->save();
+            return $app['twig']->render('create_car.twig', array('cars' => Car::getAll()));
 
-    // $app->post("/new_car", function () use ($app) {
-    //     $new_car = new Car($_POST['make_model'],$_POST['price'], $_POST['miles']);
-    //
-    //     return $app['twig']->render('create_car.twig');
-    // });
-    //
+        });
+
+        $app->post("/delete_cars", function() use ($app) {
+            Car::deleteAll();
+
+            return $app['twig']->render('delete_cars.php');
+        });
+
     return $app;
 
 ?>
