@@ -29,7 +29,6 @@
 
             // $cars = array($porsche, $ford, $lexus, $mercedes);
             $cars = array();
-            $search_results = array();
                 foreach($cars as $car) {
                     if($car->worthBuying($_GET['price']) && ($car->worthMileage($_GET['miles']))) {
                         array_push($search_results, $car);
@@ -41,7 +40,7 @@
         });
 
         $app->post("/create_car", function () use ($app) {
-            $new_car = new Car($_POST['make_model'],$_POST['price'], $_POST['miles']);
+            $new_car = new Car($_POST['make_model'],$_POST['price'], $_POST['miles'], $_POST['photo']);
             $new_car->save();
             return $app['twig']->render('create_car.twig', array('cars' => Car::getAll()));
 

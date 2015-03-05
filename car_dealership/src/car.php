@@ -2,15 +2,17 @@
 
     class Car
     {
-        public $make_model;
-        public $price;
-        public $miles;
+        private $make_model;
+        private $price;
+        private $miles;
+        private $image;
 
-        function __construct($make_model, $price, $miles)
+        function __construct($make_model, $price, $miles, $image)
         {
             $this->make_model = $make_model;
             $this->price = $price;
             $this->miles = $miles;
+            $this->image = $image;
         }
 
         function worthBuying($max_price)
@@ -51,6 +53,16 @@
         function getMiles()
         {
             return $this->miles;
+        }
+
+        function getImage()
+        {
+            return $this->image;
+        }
+
+        function setNewImage($new_image)
+        {
+            $this->image = $new_image;
         }
 
         function save()
