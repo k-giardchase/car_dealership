@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Find a Car</title>
+</head>
+<body>
+        <h1> Car List<h1>
+            {% if list_of_cars is empty %}
+                <h1> 'There are no cars that meet your search criteria. Please try again.'</h1>
+            {% else %}
+                <p>Here are all of your cars:</p>
+                <ul>
+                    {% for car in list_of_cars %}
+                        <li>{{ car.getMakeModel }} </li>
+                        <li>{{ car.getPrice }} </li>
+                        <li>{{ car.getMakeModel }} </li>
+
+                    {% endfor %}
+                </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
