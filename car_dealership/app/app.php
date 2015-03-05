@@ -5,11 +5,12 @@
 
     $app = new Silex\Application();
 
-    $app->get("/", function() {
-        return "Home";
-    });
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
+        'twig.path' => __DIR__.'/../views'
+    ));
 
-    $app->get("new_car_search", function() {
+
+    $app->get("new_car_search", function() use ($app){
         return "
         <!DOCTYPE html>
         <html>
@@ -78,8 +79,8 @@
                 ";
             }
 
-            return $output;
-            
+            return $app['twig']->render('cars.twig');
+
         }
 
     });
